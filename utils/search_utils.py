@@ -2,7 +2,7 @@
 
 import os
 import logging
-from google_search_results import GoogleSearch
+from serpapi import GoogleSearch
 from dotenv import load_dotenv
 
 logger = logging.getLogger(__name__)

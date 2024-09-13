@@ -1,41 +1,33 @@
 # main.py
 
-import sys
 import logging
-from prompt_toolkit import prompt
+from tasks import create_new_task, rerun_task
+from prompt_toolkit import PromptSession
 from prompt_toolkit.completion import WordCompleter
-from tasks.create_tasks import create_new_task, rerun_task
-from config.settings import LOGGING_CONFIG
-
-logging.basicConfig(**LOGGING_CONFIG)
-logger = logging.getLogger(__name__)
 
 def main():
-    """Main entry point of the application."""
-    logger.info("Starting Process Documentation Generator with AI Agents (Using Ollama)")
+    print("Welcome to Doc_Gen_AI: Process Documentation Generator with AI Agents")
+    session = PromptSession()
     commands = ['new', 'rerun', 'exit']
-    command_completer = WordCompleter(commands, ignore_case=True)
-    
-    try:
-        while True:
-            user_input = prompt("Enter a command (type 'exit' to quit): ", completer=command_completer)
-            user_input = user_input.strip().lower()
-            
-            if user_input == 'new':
+    command_completer = WordCompleter(commands)
+
+    while True:
+        try:
+            command = session.prompt("Enter a command (type 'exit' to quit): ", completer=command_completer).strip()
+            if command == 'new':
                 create_new_task()
-            elif user_input == 'rerun':
+            elif command == 'rerun':
                 rerun_task()
-            elif user_input == 'exit':
-                logger.info("Exiting application.")
-                sys.exit()
+            elif command == 'exit':
+                print("Exiting the program.")
+                break
             else:
-                print("Invalid command. Please enter 'new', 'rerun', or 'exit'.")
-    except KeyboardInterrupt:
-        logger.info("Application interrupted by user.")
-        sys.exit()
-    except Exception as e:
-        logger.exception("An unexpected error occurred: %s", e)
-        sys.exit(1)
+                print("Invalid command. Available commands: new, rerun, exit")
+        except KeyboardInterrupt:
+            continue
+        except EOFError:
+            break
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
     main()

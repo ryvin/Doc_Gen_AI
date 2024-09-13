@@ -1,13 +1,27 @@
-# config/__init__.py
-
 from .settings import (
+    DEFAULT_LLM,
     OLLAMA_SERVER_URL,
-    DEFAULT_MODEL,
+    OLLAMA_MODEL,
+    OPENAI_API_KEY,
+    OPENAI_MODEL,
+    CLAUDE_API_KEY,
+    CLAUDE_MODEL,
+    GROQ_API_KEY,
+    GROQ_MODEL,
+    SERPAPI_API_KEY,
     LOGGING_CONFIG,
 )
 
 __all__ = [
+    'DEFAULT_LLM',
     'OLLAMA_SERVER_URL',
-    'DEFAULT_MODEL',
+    'OLLAMA_MODEL',
+    'OPENAI_API_KEY',
+    'OPENAI_MODEL',
+    'CLAUDE_API_KEY',
+    'CLAUDE_MODEL',
+    'GROQ_API_KEY',
+    'GROQ_MODEL',
+    'SERPAPI_API_KEY',
     'LOGGING_CONFIG',
 ]
